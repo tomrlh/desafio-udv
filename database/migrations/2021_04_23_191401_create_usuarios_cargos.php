@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCargosUsuarios extends Migration
+class CreateUsuariosCargos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCargosUsuarios extends Migration
      */
     public function up()
     {
-        Schema::create('cargos_usuarios', function (Blueprint $table) {
+        Schema::create('usuarios_cargos', function (Blueprint $table) {
             $table->id();
-            $table->integer("cargo_id");
-            $table->integer("user_id");
-            $table->foreign("user_id")->references('id')->on('users');
+            $table->unsignedBigInteger("cargo_id");
+            $table->unsignedBigInteger("user_id");
             $table->foreign("cargo_id")->references('id')->on('cargos');
+            $table->foreign("user_id")->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCargosUsuarios extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cargos_usuarios');
+        Schema::dropIfExists('usuarios_cargos');
     }
 }

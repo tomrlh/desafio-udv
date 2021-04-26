@@ -16,7 +16,7 @@ class CreateFuncionariosTelefones extends Migration
         Schema::create('funcionarios_telefones', function (Blueprint $table) {
             $table->id();
             $table->string("telefone");
-            $table->integer("funcionario_id");
+            $table->unsignedBigInteger("funcionario_id");
             $table->foreign("funcionario_id")->references('id')->on('funcionarios');
             $table->timestamps();
         });

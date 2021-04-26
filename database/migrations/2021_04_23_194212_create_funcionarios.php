@@ -15,14 +15,12 @@ class CreateFuncionarios extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
-            $table->float('cargo_id');
+            $table->unsignedBigInteger('cargo_id');
             $table->string('nome');
             $table->date('data_nascimento');
             $table->string('sexo');
             $table->string('email');
             $table->string('senha');
-            $table->float('salario');
-            $table->float('salario');
             $table->float('salario');
             $table->float('categoria');
             $table->float('situacao');

@@ -16,7 +16,7 @@ class CreateFuncionariosEnderecos extends Migration
         Schema::create('funcionarios_enderecos', function (Blueprint $table) {
             $table->id();
             $table->string("endereco");
-            $table->integer("funcionario_id");
+            $table->unsignedBigInteger("funcionario_id");
             $table->foreign("funcionario_id")->references('id')->on('funcionarios');
             $table->timestamps();
         });
