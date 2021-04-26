@@ -24,7 +24,10 @@ class CreateFuncionarios extends Migration
             $table->float('salario');
             $table->float('categoria');
             $table->float('situacao');
-            $table->foreign("cargo_id")->references('id')->on('cargos');
+            $table
+                ->foreign("cargo_id")
+                ->references('id')
+                ->on('cargos');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCargos extends Migration
+class CreatePerfisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateCargos extends Migration
      */
     public function up()
     {
-        Schema::create('cargos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('perfis', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('nome');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateCargos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cargos');
+        Schema::dropIfExists('perfis');
     }
 }
