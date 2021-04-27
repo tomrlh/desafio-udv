@@ -17,7 +17,10 @@ class CreateFuncionariosTelefones extends Migration
             $table->id();
             $table->string("telefone");
             $table->unsignedBigInteger("funcionario_id");
-            $table->foreign("funcionario_id")->references('id')->on('funcionarios');
+            $table
+                ->foreign("funcionario_id")
+                ->references('id')
+                ->on('funcionarios');
             $table->timestamps();
         });
     }

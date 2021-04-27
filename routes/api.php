@@ -12,3 +12,5 @@ Route::resource(
     'departamentos',
     'App\Http\Controllers\Api\DepartamentosController'
 );
+
+Route::resource('cargos', 'App\Http\Controllers\Api\CargosController');

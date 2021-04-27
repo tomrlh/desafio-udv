@@ -16,7 +16,7 @@ class CreateDepartamentosTelefones extends Migration
         Schema::create('departamentos_telefones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("departamento_id");
-            $table->integer("telefone");
+            $table->string("telefone", 14);
             $table
                 ->foreign("departamento_id")
                 ->references('id')

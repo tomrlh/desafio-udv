@@ -16,24 +16,24 @@ class UsuariosSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Administrador',
-            'email' => 'administrador@gmail.com',
-            'password' => Hash::make('administrador'),
-            'perfil_id' => 1,
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Supervisor',
-            'email' => 'supervisor@gmail.com',
-            'password' => Hash::make('supervisor'),
-            'perfil_id' => 2,
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Funcionario',
-            'email' => 'funcionario@gmail.com',
-            'password' => Hash::make('funcionario'),
-            'perfil_id' => 3,
+            [
+                'name' => 'Administrador',
+                'email' => 'administrador@gmail.com',
+                'password' => Hash::make('administrador'),
+                'perfil_id' => 1,
+            ],
+            [
+                'name' => 'Supervisor',
+                'email' => 'supervisor@gmail.com',
+                'password' => Hash::make('supervisor'),
+                'perfil_id' => 2,
+            ],
+            [
+                'name' => 'Funcionario',
+                'email' => 'funcionario@gmail.com',
+                'password' => Hash::make('funcionario'),
+                'perfil_id' => 3,
+            ],
         ]);
     }
 }

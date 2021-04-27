@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PerfisSeeder extends Seeder
+class DepartamentosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,10 @@ class PerfisSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('perfis')->insert([
-            ['nome' => 'Administrador'],
-            ['nome' => 'Supervisor'],
-            ['nome' => 'Funcionário'],
+        DB::table('departamentos')->insert([
+            ['nome' => 'Recursos Humanos'],
+            ['nome' => 'Tecnologia da Informação'],
+            ['nome' => 'Diretoria'],
         ]);
     }
 }

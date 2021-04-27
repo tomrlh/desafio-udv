@@ -15,15 +15,15 @@ class CreateFuncionarios extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cargo_id');
+            $table->unsignedBigInteger('cargo_id')->nullable();
             $table->string('nome');
             $table->date('data_nascimento');
             $table->string('sexo');
             $table->string('email');
             $table->string('senha');
-            $table->float('salario');
-            $table->float('categoria');
-            $table->float('situacao');
+            $table->float('salario')->nullable();
+            $table->float('categoria')->nullable();
+            $table->float('situacao')->nullable();
             $table
                 ->foreign("cargo_id")
                 ->references('id')
@@ -32,7 +32,7 @@ class CreateFuncionarios extends Migration
         });
     }
 
-    /**
+    /**s
      * Reverse the migrations.
      *
      * @return void
