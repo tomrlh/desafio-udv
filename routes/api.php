@@ -14,3 +14,8 @@ Route::resource(
 );
 
 Route::resource('cargos', 'App\Http\Controllers\Api\CargosController');
+
+Route::resource(
+    'funcionarios',
+    'App\Http\Controllers\Api\FuncionariosController'
+);
