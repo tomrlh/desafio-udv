@@ -1,3 +1,8 @@
 {
-    "phpformatter.composer": false
+    "phpformatter.composer": false,
+    "cSpell.words": [
+        "Authenticatable",
+        "Laravel",
+        "perfis"
+    ]
 }

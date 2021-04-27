@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\RedirectResponse as Redirect;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,7 +13,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return User::all();
+        return User::with('perfil')->get();
     }
 
     public function show($id)
@@ -20,7 +23,26 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        return User::create($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'perfil_id' => 'required|numeric|exists:perfis,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        $user->perfil()->associate($request->perfil_id);
+
+        return response()->json($user);
     }
 
     public function update(Request $request, $id)
@@ -31,11 +53,11 @@ class UsersController extends Controller
         return $user;
     }
 
-    public function delete(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         $user = User::findOrFail($id);
         $user->delete();
 
-        return 204;
+        return true;
     }
 }
