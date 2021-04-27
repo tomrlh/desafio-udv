@@ -7,8 +7,10 @@ export const loginRequest = async (user: {
   let res: any = await axios
     .post("login", user)
     .then(response => {
-      localStorage.setItem("token", response.data.token);
-      axios.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
+      localStorage.setItem("token", response.data.access_token);
+      axios.defaults.headers[
+        "Authorization"
+      ] = `Bearer ${response.data.access_token}`;
       return response.data;
     })
     .catch(error => error.response);

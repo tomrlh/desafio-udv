@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
+import { notyfErrors } from "utils/notifications";
 import { loginRequest } from "../../requests/Login";
 
 const Login = () => {
@@ -8,7 +9,9 @@ const Login = () => {
 
   const login = async () => {
     let response = await loginRequest({ email, password: senha });
-    console.log(response);
+    if (!response.access_token) {
+      notyfErrors(response.data);
+    }
   };
 
   return (
