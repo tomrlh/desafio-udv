@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\RedirectResponse as Redirect;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Controllers\Controller;
