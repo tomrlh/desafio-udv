@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Funcionario;
+use App\Models\FuncionarioTelefone;
 
-class FuncionariosSeeder extends Seeder
+class FuncionariosTelefonesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class FuncionariosSeeder extends Seeder
     public function run()
     {
         for ($counter = 0; $counter <= 10; $counter++) {
-            Funcionario::factory()->create();
+            FuncionarioTelefone::factory()->create();
         }
     }
 }
