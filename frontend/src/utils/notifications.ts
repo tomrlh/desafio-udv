@@ -1,9 +1,5 @@
 import { Notyf } from "notyf";
 
-type Message = {
-  errors: string[];
-};
-
 export const notyfSuccess = (
   message: string,
   duration: number = 4000,

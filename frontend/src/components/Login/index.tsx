@@ -2,15 +2,19 @@
 import React, { useState } from "react";
 import { notyfErrors } from "utils/notifications";
 import { loginRequest } from "../../requests/Login";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  let navigate = useNavigate();
 
   const login = async () => {
     let response = await loginRequest({ email, password: senha });
     if (!response.access_token) {
       notyfErrors(response.data);
+    } else {
+      navigate("/dashboard");
     }
   };
 
