@@ -10,21 +10,16 @@ Route::get('status', function () {
 
 Route::post('login', 'App\Http\Controllers\Api\AuthController@login');
 
-Route::resource('users', 'App\Http\Controllers\Api\UsersController');
+Route::resource('users', 'App\Http\Controllers\Api\UsersController')->middleware('auth:sanctum');
 
 Route::resource(
     'departamentos',
     'App\Http\Controllers\Api\DepartamentosController'
-);
+)->middleware('auth:sanctum');
 
-Route::resource('cargos', 'App\Http\Controllers\Api\CargosController');
+Route::resource('cargos', 'App\Http\Controllers\Api\CargosController')->middleware('auth:sanctum');
 
 Route::resource(
     'funcionarios',
     'App\Http\Controllers\Api\FuncionariosController'
-);
-
-Route::put(
-    'funcionarios/{id}/admissao',
-    'App\Http\Controllers\Api\FuncionariosController@admissao'
-);
+)->middleware('auth:sanctum');

@@ -29,10 +29,12 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
+        $user->load('perfil');
         $authToken = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
             'access_token' => $authToken,
+            'usuario' => $user
         ]);
     }
 }
