@@ -24,7 +24,7 @@ const renderListItem = (
       {usuario.name}
       <div style={{ float: "right" }}>
         <CustomModal
-          id={modalId}
+          id={`edit-${usuario.id}`}
           popupText="Usuario"
           title="Usuario"
           size={"modal-sm"}
@@ -33,7 +33,7 @@ const renderListItem = (
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${modalId}`}
+              data-target={`#${`edit-${usuario.id}`}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"
@@ -86,11 +86,14 @@ export default function UsuariosCardPanel(props: Props) {
     <div>
       <div className="card text-white bg-info mb-3" style={{ maxWidth: 350 }}>
         <div className="card-header">
-          <i
-            className="bi bi-person-circle text-light"
-            style={styles.mediumIcon}
-          />{" "}
-          USUÁRIOS
+          <span style={{ float: "left" }}>
+            <i
+              className="bi bi-person-circle text-light"
+              style={styles.mediumIcon}
+            />{" "}
+            USUÁRIOS
+          </span>
+          <span style={{ float: "right" }}>Total: {usuarios.length}</span>
         </div>
         <div className="card-body" style={styles.bodyList}>
           <ul className="list-group">

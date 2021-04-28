@@ -15,8 +15,6 @@ type Props = {
   funcionarios: Funcionario[];
 };
 
-const modalId = generateRandomNumber(10);
-
 const renderListItem = (
   funcionario: Funcionario,
   atualizarFuncionario: Function,
@@ -27,7 +25,7 @@ const renderListItem = (
       {funcionario.nome}
       <div style={{ float: "right" }}>
         <CustomModal
-          id={modalId}
+          id={`edit-${funcionario.id}`}
           popupText="Funcionario"
           title="Funcionario"
           size="modal-lg"
@@ -36,7 +34,7 @@ const renderListItem = (
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${modalId}`}
+              data-target={`#${`edit-${funcionario.id}`}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"
@@ -94,11 +92,15 @@ export default function FuncionariosCardPanel(props: Props) {
         style={{ maxWidth: 350 }}
       >
         <div className="card-header">
-          <i
-            className="bi bi-file-earmark-person text-light"
-            style={styles.mediumIcon}
-          />{" "}
-          FUNCIONÁRIOS
+          <span style={{ float: "left" }}>
+            <i
+              className="bi bi-file-earmark-person text-light"
+              style={styles.mediumIcon}
+            />{" "}
+            FUNCIONÁRIOS
+          </span>
+
+          <span style={{ float: "right" }}>Total: {funcionarios.length}</span>
         </div>
         <div className="card-body" style={styles.bodyList}>
           <ul className="list-group">

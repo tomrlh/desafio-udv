@@ -7,6 +7,7 @@ import { CargoContext } from "store/contexts/CargoContext";
 import { notyfError, notyfSuccess } from "utils/notifications";
 import { generateRandomNumber } from "utils/helpers";
 import { styles } from "components/Global/Styles";
+import AdmissaoForm from "components/Funcionario/Table/Actions/Admissao";
 
 type Props = {
   cargos: Cargo[];
@@ -28,7 +29,7 @@ const renderListItem = (
       </p>
       <div style={{ float: "right" }}>
         <CustomModal
-          id={modalId}
+          id={`edit-${cargo.id}`}
           popupText="Cargo"
           title="Cargo"
           size={"modal-sm"}
@@ -37,7 +38,7 @@ const renderListItem = (
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${modalId}`}
+              data-target={`#${`edit-${cargo.id}`}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"
@@ -92,8 +93,15 @@ export default function CargosCardPanel(props: Props) {
         style={{ maxWidth: 350 }}
       >
         <div className="card-header">
-          <i className="bi bi-briefcase text-light" style={styles.mediumIcon} />{" "}
-          CARGOS
+          <span style={{ float: "left" }}>
+            <i
+              className="bi bi-briefcase text-light"
+              style={styles.mediumIcon}
+            />{" "}
+            CARGOS
+          </span>
+
+          <span style={{ float: "right" }}>Total: {cargos.length}</span>
         </div>
         <div className="card-body" style={styles.bodyList}>
           <ul className="list-group">
@@ -130,7 +138,7 @@ export default function CargosCardPanel(props: Props) {
                 />
               </button>
             }
-            content={<CargoForm />}
+            content={<AdmissaoForm />}
           />
         </div>
       </div>
