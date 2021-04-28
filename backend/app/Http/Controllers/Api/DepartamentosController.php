@@ -25,12 +25,12 @@ class DepartamentosController extends Controller
     {
         $request->validate([
             'nome' => 'required|unique:departamentos|max:255',
+        ], [
+            'nome.required' => 'Nome é obrigatório',
         ]);
 
         $departamento = Departamento::create([
             'nome' => $request->nome,
-        ], [
-            'nome.required' => 'Nome é obrigatório',
         ]);
 
         foreach ($request->telefones as $telefone) {
