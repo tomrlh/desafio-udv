@@ -29,7 +29,7 @@ const renderListItem = (
       </p>
       <div style={{ float: "right" }}>
         <CustomModal
-          id={`edit-${cargo.id}`}
+          id={`edit-cargo-${cargo.id}`}
           popupText="Cargo"
           title="Cargo"
           size={"modal-sm"}
@@ -38,7 +38,7 @@ const renderListItem = (
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${`edit-${cargo.id}`}`}
+              data-target={`#${`edit-cargo-${cargo.id}`}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"
@@ -138,7 +138,7 @@ export default function CargosCardPanel(props: Props) {
                 />
               </button>
             }
-            content={<AdmissaoForm />}
+            content={<CargoForm />}
           />
         </div>
       </div>

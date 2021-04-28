@@ -25,7 +25,7 @@ const renderListItem = (
       {departamento.nome}
       <div style={{ float: "right" }}>
         <CustomModal
-          id={`edit-${departamento.id}`}
+          id={`edit-departamento-${departamento.id}`}
           popupText="Departamento"
           title="Departamento"
           size={"modal-sm"}
@@ -34,7 +34,7 @@ const renderListItem = (
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${`edit-${departamento.id}`}`}
+              data-target={`#${`edit-departamento-${departamento.id}`}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"

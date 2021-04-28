@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Departamento;
+use App\Models\DepartamentoTelefone;
 
 class DepartamentosController extends Controller
 {
     public function index()
     {
-        return Departamento::all();
+        return Departamento::with('telefones')->get();
     }
 
     public function show($id)
@@ -22,17 +23,21 @@ class DepartamentosController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'nome' => 'required|unique:departamentos|max:255',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->messages());
-        }
 
         $departamento = Departamento::create([
             'nome' => $request->nome,
         ]);
+
+        foreach ($request->telefones as $telefone) {
+            DepartamentoTelefone::create([
+                'telefone' => $telefone, 'departamento_id' => $departamento->id
+            ]);
+        }
+
+        $departamento->load(['telefones']);
 
         return response()->json($departamento);
     }

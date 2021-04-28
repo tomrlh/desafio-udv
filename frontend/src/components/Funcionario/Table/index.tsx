@@ -4,6 +4,7 @@ import PropsFilter from "components/Global/ReactDataTable/PropsFilter";
 import { styles } from "components/Global/Styles";
 import React, { useState } from "react";
 import { Funcionario } from "types/Funcionario";
+import { findSituacaoColor } from "utils/helpers";
 import AdmissaoForm from "./Actions/Admissao";
 import AumentoForm from "./Actions/Aumento/Form";
 import PromocaoForm from "./Actions/Promocao/Form";
@@ -43,7 +44,24 @@ const columns = [
     name: "Situação",
     selector: "situacao",
     sortable: true,
-    cell: (row: Funcionario) => <>{row && row.situacao}</>
+    cell: (row: Funcionario) => (
+      <>
+        {row && row.situacao && (
+          <span
+            className={`badge ${findSituacaoColor(row.situacao)}`}
+            style={localStyles.situacaoFontSize}
+          >
+            {row.situacao}
+          </span>
+        )}
+      </>
+    )
+  },
+  {
+    name: "Categoria",
+    selector: "categoria",
+    sortable: true,
+    cell: (row: Funcionario) => <>{row && row.categoria}</>
   },
   {
     name: "Salário",
@@ -57,70 +75,78 @@ const columns = [
     minWidth: "300px",
     cell: (row: Funcionario) => (
       <div style={localStyles.actionButtonContainer}>
-        <CustomModal
-          id={"admissaoModalId"}
-          title="Admissão"
-          size={"modal-sm"}
-          trigger={
-            <button
-              type="button"
-              className="btn btn-primary btn-sm"
-              data-toggle="modal"
-              data-target={`#${"admissaoModalId"}`}
-            >
-              <i className="bi bi-plus-circle" /> ADMITIR
-            </button>
-          }
-          content={<AdmissaoForm funcionario={row} />}
-        />{" "}
-        <CustomModal
-          id={"situacaoModalId"}
-          title="Situação"
-          size={"modal-sm"}
-          trigger={
-            <button
-              type="button"
-              className="btn btn-warning btn-sm"
-              data-toggle="modal"
-              data-target={`#${"situacaoModalId"}`}
-            >
-              <i className="bi bi-clipboard-data" /> SITUAÇÃO
-            </button>
-          }
-          content={<SituacaoForm funcionario={row} />}
-        />{" "}
-        <CustomModal
-          id={"promocaoModalId"}
-          title="Situação"
-          size={"modal-sm"}
-          trigger={
-            <button
-              type="button"
-              className="btn btn-info btn-sm"
-              data-toggle="modal"
-              data-target={`#${"promocaoModalId"}`}
-            >
-              <i className="bi bi-capslock" style={styles.smallIcon} />
-            </button>
-          }
-          content={<PromocaoForm funcionario={row} />}
-        />{" "}
-        <CustomModal
-          id={"aumentoModalId"}
-          title="Situação"
-          size={"modal-sm"}
-          trigger={
-            <button
-              type="button"
-              className="btn btn-success btn-sm"
-              data-toggle="modal"
-              data-target={`#${"aumentoModalId"}`}
-            >
-              <i className="bi bi-cash" style={styles.smallIcon} />
-            </button>
-          }
-          content={<AumentoForm funcionario={row} />}
-        />
+        {!row.situacao && (
+          <CustomModal
+            id={`admissao-${row.id}`}
+            title="Admissão"
+            size={"modal-sm"}
+            trigger={
+              <button
+                type="button"
+                className="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target={`#${`admissao-${row.id}`}`}
+              >
+                <i className="bi bi-plus-circle" /> ADMITIR
+              </button>
+            }
+            content={<AdmissaoForm funcionario={row} />}
+          />
+        )}{" "}
+        {row.situacao && (
+          <CustomModal
+            id={`situacao-${row.id}`}
+            title="Situação"
+            size={"modal-sm"}
+            trigger={
+              <button
+                type="button"
+                className="btn btn-warning btn-sm"
+                data-toggle="modal"
+                data-target={`#${`situacao-${row.id}`}`}
+              >
+                <i className="bi bi-clipboard-data" /> SITUAÇÃO
+              </button>
+            }
+            content={<SituacaoForm funcionario={row} />}
+          />
+        )}{" "}
+        {row.situacao && (
+          <CustomModal
+            id={`promocao-${row.id}`}
+            title="Promoção"
+            size={"modal-sm"}
+            trigger={
+              <button
+                type="button"
+                className="btn btn-info btn-sm"
+                data-toggle="modal"
+                data-target={`#${`promocao-${row.id}`}`}
+              >
+                <i className="bi bi-capslock" style={styles.smallIcon} />
+              </button>
+            }
+            content={<PromocaoForm funcionario={row} />}
+          />
+        )}{" "}
+        {row.situacao && (
+          <CustomModal
+            id={`aumento-${row.id}`}
+            title="Aumento"
+            size={"modal-sm"}
+            trigger={
+              <button
+                type="button"
+                className="btn btn-success btn-sm"
+                data-toggle="modal"
+                data-target={`#${`aumento-${row.id}`}`}
+              >
+                <i className="bi bi-cash" style={styles.smallIcon} />
+              </button>
+            }
+            content={<AumentoForm funcionario={row} />}
+          />
+        )}{" "}
       </div>
     )
   }
@@ -157,5 +183,8 @@ FuncionariosTable.defaultProps = {
 const localStyles = {
   actionButtonContainer: {
     padding: 5
+  },
+  situacaoFontSize: {
+    fontSize: 11
   }
 };

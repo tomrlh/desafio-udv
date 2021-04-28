@@ -23,3 +23,8 @@ Route::resource(
     'funcionarios',
     'App\Http\Controllers\Api\FuncionariosController'
 );
+
+Route::put(
+    'funcionarios/{id}/admissao',
+    'App\Http\Controllers\Api\FuncionariosController@admissao'
+);

@@ -20,7 +20,7 @@ class CreateDepartamentosTelefones extends Migration
             $table
                 ->foreign("departamento_id")
                 ->references('id')
-                ->on('departamentos');
+                ->on('departamentos')->onDelete('cascade');
             $table->timestamps();
         });
     }

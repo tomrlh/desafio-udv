@@ -39,7 +39,7 @@ export default function UsuarioForm(props: Props) {
       novoUsuario.id = props.usuario.id;
       response = await atualizarUsuarioRequest(novoUsuario);
       if (response) {
-        atualizarUsuario(novoUsuario);
+        atualizarUsuario(response);
         notyfSuccess("Usuario atualizado");
       } else {
         notyfError("Erro ao atualizar usuario");

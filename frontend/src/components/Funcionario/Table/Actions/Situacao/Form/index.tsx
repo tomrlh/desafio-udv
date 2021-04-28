@@ -1,42 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getCargosRequest } from "requests/Cargo";
-import { CargoContext } from "store/contexts/CargoContext";
-import { DepartamentoContext } from "store/contexts/DepartamentoContext";
+import React, { useContext, useState } from "react";
+import { atualizarFuncionarioRequest } from "requests/Funcionario";
+import { FuncionarioContext } from "store/contexts/FuncionarioContext";
 import { Funcionario } from "types/Funcionario";
 import { notyfError, notyfErrors, notyfSuccess } from "utils/notifications";
+import * as constants from "utils/constants";
 
 type Props = {
   funcionario: Funcionario;
 };
 
 export default function SituacaoForm(props: Props) {
-  const { cargos, setCargos } = useContext(CargoContext);
-  const [cargoId, setCargoId] = useState(0);
+  const { atualizarFuncionario } = useContext(FuncionarioContext);
+  const [situacao, setSituacao] = useState("");
+
+  const clearForm = () => {};
 
   const submit = async () => {
-    /*let novoDepartamento = { nome, telefones } as Departamento;
+    let novoFuncionario = {
+      id: props.funcionario.id,
+      situacao
+    } as Funcionario;
 
-    let response = null;
-
-    if (props.departamento) {
-      novoDepartamento.id = props.departamento.id;
-      response = await atualizarDepartamentoRequest(novoDepartamento);
-      if (response) {
-        atualizarDepartamento(novoDepartamento);
-        notyfSuccess("Departamento atualizado");
-      } else {
-        notyfError("Erro ao atualizar departamento");
-      }
+    let response = await atualizarFuncionarioRequest(novoFuncionario);
+    if (response) {
+      atualizarFuncionario(response);
+      notyfSuccess("Funcionario admitido");
+      clearForm();
     } else {
-      response = await saveDepartamentoRequest(novoDepartamento);
-      if (response.errors) {
-        notyfErrors(response);
-      } else {
-        notyfSuccess("Departamento cadastrado");
-        addDepartamento(response);
-        clearForm();
-      }
-    }*/
+      notyfError("Erro ao atualizar departamento");
+    }
   };
 
   return (
@@ -48,17 +40,17 @@ export default function SituacaoForm(props: Props) {
             className="form-control"
             id="departamentoSelect"
             onChange={e => {
-              console.log(Number(e.target.value));
-              setCargoId(Number(e.target.value));
+              console.log(e.target.value);
+              setSituacao(e.target.value);
             }}
           >
             <option selected value="0">
               Selecione
             </option>
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
-            <option value="Em Férias">Em férias</option>
-            <option value="Aposentado(a)">Aposentado(a)</option>
+            <option value={constants.ATIVO}>{constants.ATIVO}</option>
+            <option value={constants.INATIVO}>{constants.INATIVO}</option>
+            <option value={constants.FERIAS}>{constants.FERIAS}</option>
+            <option value={constants.APOSENTADO}>{constants.APOSENTADO}</option>
           </select>
         </div>
 

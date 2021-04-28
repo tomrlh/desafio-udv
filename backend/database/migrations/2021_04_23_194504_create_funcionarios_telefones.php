@@ -20,7 +20,7 @@ class CreateFuncionariosTelefones extends Migration
             $table
                 ->foreign("funcionario_id")
                 ->references('id')
-                ->on('funcionarios');
+                ->on('funcionarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

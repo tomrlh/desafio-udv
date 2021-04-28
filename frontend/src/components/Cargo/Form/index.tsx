@@ -36,7 +36,7 @@ export default function CargoForm(props: Props) {
       novoCargo.id = props.cargo.id;
       response = await atualizarCargoRequest(novoCargo);
       if (response) {
-        atualizarCargo(novoCargo);
+        atualizarCargo(response);
         notyfSuccess("Cargo atualizado");
       } else {
         notyfError("Erro ao atualizar cargo");

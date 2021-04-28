@@ -1,49 +1,51 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getCargosRequest } from "requests/Cargo";
+import { atualizarFuncionarioRequest } from "requests/Funcionario";
 import { CargoContext } from "store/contexts/CargoContext";
 import { DepartamentoContext } from "store/contexts/DepartamentoContext";
+import { FuncionarioContext } from "store/contexts/FuncionarioContext";
 import { Funcionario } from "types/Funcionario";
 import { notyfError, notyfErrors, notyfSuccess } from "utils/notifications";
+import * as constants from "utils/constants";
 
 type Props = {
   funcionario: Funcionario;
 };
 
 export default function AdmissaoForm(props: Props) {
-  const { cargos, setCargos } = useContext(CargoContext);
+  const { cargos } = useContext(CargoContext);
+  const { atualizarFuncionario } = useContext(FuncionarioContext);
   const [cargoId, setCargoId] = useState(0);
   const [categoria, setCategoria] = useState("");
   const [salario, setSalario] = useState("");
 
+  const clearForm = () => {};
+
   const submit = async () => {
-    /*let novoDepartamento = { nome, telefones } as Departamento;
+    let novoFuncionario = {
+      id: props.funcionario.id,
+      cargo_id: cargoId,
+      categoria,
+      salario: Number(salario),
+      situacao: "Ativo"
+    } as Funcionario;
+    console.log("NOVO", novoFuncionario);
 
-    let response = null;
-
-    if (props.departamento) {
-      novoDepartamento.id = props.departamento.id;
-      response = await atualizarDepartamentoRequest(novoDepartamento);
-      if (response) {
-        atualizarDepartamento(novoDepartamento);
-        notyfSuccess("Departamento atualizado");
-      } else {
-        notyfError("Erro ao atualizar departamento");
-      }
+    let response = await atualizarFuncionarioRequest(novoFuncionario);
+    if (response) {
+      atualizarFuncionario(response);
+      notyfSuccess("Funcionario admitido");
+      clearForm();
     } else {
-      response = await saveDepartamentoRequest(novoDepartamento);
-      if (response.errors) {
-        notyfErrors(response);
-      } else {
-        notyfSuccess("Departamento cadastrado");
-        addDepartamento(response);
-        clearForm();
-      }
-    }*/
+      notyfError("Erro ao atualizar departamento");
+    }
   };
 
   return (
     <div>
       <fieldset>
+        {props.funcionario && <h5>Admissão de {props.funcionario.nome}</h5>}
+
         <div className="form-group">
           <label htmlFor="cardoAdmissaoSelect">Cargo</label>
           <select
@@ -73,18 +75,18 @@ export default function AdmissaoForm(props: Props) {
             className="form-control"
             id="categoriaAdmissaoSelect"
             onChange={e => {
-              console.log(Number(e.target.value));
+              console.log(e.target.value);
               setCategoria(e.target.value);
             }}
           >
             <option selected value="0">
               Selecione
             </option>
-            <option value="Traineer">Traineer</option>
-            <option value="Júnior">Júnior</option>
-            <option value="Pleno">Pleno</option>
-            <option value="Sênior">Sênior</option>
-            <option value="Master">Master</option>
+            <option value={constants.TRAINEER}>{constants.TRAINEER}</option>
+            <option value={constants.JUNIOR}>{constants.JUNIOR}</option>
+            <option value={constants.PLENO}>{constants.PLENO}</option>
+            <option value={constants.SENIOR}>{constants.SENIOR}</option>
+            <option value={constants.MASTER}>{constants.MASTER}</option>
           </select>
         </div>
 
@@ -95,6 +97,7 @@ export default function AdmissaoForm(props: Props) {
             className="form-control"
             value={salario}
             onChange={e => {
+              console.log(e.target.value);
               setSalario(e.target.value);
             }}
           />

@@ -22,22 +22,21 @@ class CargosController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'nome' => 'required|unique:cargos|max:255',
             'salario_base' => 'required|numeric',
             'departamento_id' => 'required|numeric|exists:departamentos,id',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->messages());
-        }
-
         $cargo = Cargo::create([
             'nome' => $request->nome,
             'salario_base' => $request->salario_base,
+            'departamento_id' => $request->departamento_id
         ]);
 
         $cargo->departamento()->associate($request->departamento_id);
+
+        $cargo->load('departamento');
 
         return response()->json($cargo);
     }
@@ -46,6 +45,8 @@ class CargosController extends Controller
     {
         $cargo = Cargo::findOrFail($id);
         $cargo->update($request->all());
+
+        $cargo->load('departamento');
 
         return $cargo;
     }

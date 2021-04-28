@@ -22,16 +22,12 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:users|max:255',
+        $request->validate([
+            'name' => 'required|max:255',
             'email' => 'required|unique:users',
             'password' => 'required',
             'perfil_id' => 'required|numeric|exists:perfis,id',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->messages());
-        }
 
         $user = User::create([
             'name' => $request->name,

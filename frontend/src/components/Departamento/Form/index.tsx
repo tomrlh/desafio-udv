@@ -39,7 +39,7 @@ export default function DepartamentoForm(props: Props) {
       novoDepartamento.id = props.departamento.id;
       response = await atualizarDepartamentoRequest(novoDepartamento);
       if (response) {
-        atualizarDepartamento(novoDepartamento);
+        atualizarDepartamento(response);
         notyfSuccess("Departamento atualizado");
       } else {
         notyfError("Erro ao atualizar departamento");

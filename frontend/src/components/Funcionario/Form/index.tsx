@@ -42,7 +42,7 @@ export default function FuncionarioForm(props: Props) {
     setEmail("");
     setSenha("");
     setDataNascimento("");
-    setSexo("0");
+    setSexo("");
     setTelefoneToAdd("");
     setEnderecoToAdd("");
     setTelefones([]);
@@ -85,11 +85,22 @@ export default function FuncionarioForm(props: Props) {
 
   useEffect(() => {
     if (props.funcionario) {
-      setNome(props.funcionario.nome);
-      setEmail(props.funcionario.email);
-      setSenha(props.funcionario.senha);
-      setTelefones(props.funcionario.telefones);
-      setEnderecos(props.funcionario.enderecos);
+      setNome(props.funcionario.nome ? props.funcionario.nome : "");
+      setEmail(props.funcionario.email ? props.funcionario.email : "");
+      setSenha(props.funcionario.senha ? props.funcionario.senha : "");
+      setSexo(props.funcionario.sexo ? props.funcionario.sexo : "");
+      console.log(props.funcionario.sexo);
+      setDataNascimento(
+        props.funcionario.data_nascimento
+          ? props.funcionario.data_nascimento
+          : ""
+      );
+      setTelefones(
+        props.funcionario.telefones?.map(telefone => telefone.telefone)
+      );
+      setEnderecos(
+        props.funcionario.enderecos?.map(endereco => endereco.endereco)
+      );
     }
   }, []);
 
@@ -161,10 +172,9 @@ export default function FuncionarioForm(props: Props) {
                   setSexo(e.target.value);
                 }}
               >
-                <option selected value="0">
-                  Selecione
+                <option selected value="M">
+                  Masculino
                 </option>
-                <option value="M">Masculino</option>
                 <option value="F">Feminino</option>
               </select>
             </div>
@@ -261,23 +271,24 @@ export default function FuncionarioForm(props: Props) {
 
               <div style={styles.bodyList}>
                 <ul className="list-group">
-                  {enderecos.map((endereco: any, idx: number) => (
-                    <li
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                      key={idx}
-                    >
-                      {typeof endereco === "object"
-                        ? endereco.endereco
-                        : endereco}
-                      <span
-                        className="badge badge-primary badge-pill"
-                        style={styles.addTelefone}
-                        onClick={() => removeEndereco(idx)}
+                  {enderecos &&
+                    enderecos.map((endereco: any, idx: number) => (
+                      <li
+                        className="list-group-item d-flex justify-content-between align-items-center"
+                        key={idx}
                       >
-                        X
-                      </span>
-                    </li>
-                  ))}
+                        {typeof endereco === "object"
+                          ? endereco.endereco
+                          : endereco}
+                        <span
+                          className="badge badge-primary badge-pill"
+                          style={styles.addTelefone}
+                          onClick={() => removeEndereco(idx)}
+                        >
+                          X
+                        </span>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

@@ -11,6 +11,11 @@ class Funcionario extends Model
 
     protected $fillable = ['nome', 'data_nascimento', 'sexo', 'email', 'senha'];
 
+    public function cargo()
+    {
+        return $this->belongsTo(Cargo::class);
+    }
+
     public function telefones()
     {
         return $this->hasMany(FuncionarioTelefone::class);

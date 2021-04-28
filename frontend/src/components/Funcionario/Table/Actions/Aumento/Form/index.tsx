@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getCargosRequest } from "requests/Cargo";
-import { CargoContext } from "store/contexts/CargoContext";
-import { DepartamentoContext } from "store/contexts/DepartamentoContext";
+import React, { useContext, useState } from "react";
+import { atualizarFuncionarioRequest } from "requests/Funcionario";
+import { FuncionarioContext } from "store/contexts/FuncionarioContext";
 import { Funcionario } from "types/Funcionario";
 import { notyfError, notyfErrors, notyfSuccess } from "utils/notifications";
 
@@ -10,32 +9,26 @@ type Props = {
 };
 
 export default function AumentoForm(props: Props) {
+  const { atualizarFuncionario } = useContext(FuncionarioContext);
+  const [situacao, setSituacao] = useState("");
   const [salario, setSalario] = useState("");
 
+  const clearForm = () => {};
+
   const submit = async () => {
-    /*let novoDepartamento = { nome, telefones } as Departamento;
+    let novoFuncionario = {
+      id: props.funcionario.id,
+      salario: Number(salario)
+    } as Funcionario;
 
-    let response = null;
-
-    if (props.departamento) {
-      novoDepartamento.id = props.departamento.id;
-      response = await atualizarDepartamentoRequest(novoDepartamento);
-      if (response) {
-        atualizarDepartamento(novoDepartamento);
-        notyfSuccess("Departamento atualizado");
-      } else {
-        notyfError("Erro ao atualizar departamento");
-      }
+    let response = await atualizarFuncionarioRequest(novoFuncionario);
+    if (response) {
+      atualizarFuncionario(response);
+      notyfSuccess("Salário aumentado");
+      clearForm();
     } else {
-      response = await saveDepartamentoRequest(novoDepartamento);
-      if (response.errors) {
-        notyfErrors(response);
-      } else {
-        notyfSuccess("Departamento cadastrado");
-        addDepartamento(response);
-        clearForm();
-      }
-    }*/
+      notyfError("Erro ao atualizar salário");
+    }
   };
 
   return (
@@ -67,16 +60,4 @@ export default function AumentoForm(props: Props) {
 
 AumentoForm.defaultProps = {
   funcionario: null
-};
-
-const styles = {
-  bodyList: {
-    float: "left" as const,
-    width: 200,
-    overflow: "auto",
-    height: 100
-  },
-  addTelefone: {
-    cursor: "pointer"
-  }
 };

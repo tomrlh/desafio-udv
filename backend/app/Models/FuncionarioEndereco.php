@@ -9,5 +9,7 @@ class FuncionarioEndereco extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['endereco', 'funcionario_id'];
+
     protected $table = 'funcionarios_enderecos';
 }

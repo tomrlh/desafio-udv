@@ -17,7 +17,7 @@ class CreateFuncionariosEnderecos extends Migration
             $table->id();
             $table->string("endereco");
             $table->unsignedBigInteger("funcionario_id");
-            $table->foreign("funcionario_id")->references('id')->on('funcionarios');
+            $table->foreign("funcionario_id")->references('id')->on('funcionarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

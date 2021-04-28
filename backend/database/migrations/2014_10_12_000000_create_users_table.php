@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table
                 ->foreign("perfil_id")
                 ->references('id')
-                ->on('perfis');
+                ->on('perfis')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

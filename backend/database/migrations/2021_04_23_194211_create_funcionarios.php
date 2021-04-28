@@ -22,12 +22,12 @@ class CreateFuncionarios extends Migration
             $table->string('email');
             $table->string('senha');
             $table->float('salario')->nullable();
-            $table->float('categoria')->nullable();
-            $table->float('situacao')->nullable();
+            $table->string('categoria')->nullable();
+            $table->string('situacao')->nullable();
             $table
                 ->foreign("cargo_id")
                 ->references('id')
-                ->on('cargos');
+                ->on('cargos')->onDelete('cascade');
             $table->timestamps();
         });
     }

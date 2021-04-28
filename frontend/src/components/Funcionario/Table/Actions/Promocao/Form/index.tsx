@@ -1,77 +1,58 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getCargosRequest } from "requests/Cargo";
-import { CargoContext } from "store/contexts/CargoContext";
-import { DepartamentoContext } from "store/contexts/DepartamentoContext";
+import React, { useContext } from "react";
+import { atualizarFuncionarioRequest } from "requests/Funcionario";
+import { FuncionarioContext } from "store/contexts/FuncionarioContext";
 import { Funcionario } from "types/Funcionario";
-import { notyfError, notyfErrors, notyfSuccess } from "utils/notifications";
+import { notyfError, notyfSuccess } from "utils/notifications";
+import { findProximaCategoria } from "utils/helpers";
 
 type Props = {
   funcionario: Funcionario;
 };
 
 export default function PromocaoForm(props: Props) {
-  const { cargos, setCargos } = useContext(CargoContext);
-  const [cargoId, setCargoId] = useState(0);
-  const [categoria, setCategoria] = useState("");
-  const [salario, setSalario] = useState("");
+  const { atualizarFuncionario } = useContext(FuncionarioContext);
 
   const submit = async () => {
-    /*let novoDepartamento = { nome, telefones } as Departamento;
+    if (!props.funcionario.categoria || !props.funcionario.salario) return;
+    let nextCategoria = findProximaCategoria(props.funcionario.categoria);
+    let novoFuncionario = {
+      id: props.funcionario.id,
+      categoria: nextCategoria
+    } as Funcionario;
 
-    let response = null;
+    console.log("NOVO", novoFuncionario);
 
-    if (props.departamento) {
-      novoDepartamento.id = props.departamento.id;
-      response = await atualizarDepartamentoRequest(novoDepartamento);
-      if (response) {
-        atualizarDepartamento(novoDepartamento);
-        notyfSuccess("Departamento atualizado");
-      } else {
-        notyfError("Erro ao atualizar departamento");
-      }
+    if (props.funcionario.categoria !== nextCategoria) {
+      let antigoSalario = props.funcionario.salario;
+      novoFuncionario.salario = antigoSalario + (antigoSalario / 100) * 25;
+    }
+
+    let response = await atualizarFuncionarioRequest(novoFuncionario);
+    if (response) {
+      atualizarFuncionario(response);
+      notyfSuccess("Funcionario promovido");
     } else {
-      response = await saveDepartamentoRequest(novoDepartamento);
-      if (response.errors) {
-        notyfErrors(response);
-      } else {
-        notyfSuccess("Departamento cadastrado");
-        addDepartamento(response);
-        clearForm();
-      }
-    }*/
+      notyfError("Erro ao promover funcionário");
+    }
   };
 
   return (
     <div>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="categoriaAdmissaoSelect">Categoria</label>
-          <select
-            className="form-control"
-            id="categoriaAdmissaoSelect"
-            onChange={e => {
-              console.log(Number(e.target.value));
-              setCategoria(e.target.value);
-            }}
-          >
-            <option selected value="0">
-              Selecione
-            </option>
-            <option value="Traineer">Traineer</option>
-            <option value="Júnior">Júnior</option>
-            <option value="Pleno">Pleno</option>
-            <option value="Sênior">Sênior</option>
-            <option value="Master">Master</option>
-          </select>
-        </div>
+          <h5>
+            Funcionário será promovido de {props.funcionario.categoria} para{" "}
+            {findProximaCategoria(props.funcionario.categoria)}
+          </h5>
 
-        <button
-          type="button"
-          className="btn btn-success btn-lg btn-block"
-          onClick={submit}
-        >
-          {props.funcionario ? "Atualizar" : "Cadastrar"}
-        </button>
+          <button
+            type="button"
+            className="btn btn-success btn-lg btn-block"
+            onClick={submit}
+          >
+            {props.funcionario ? "Atualizar" : "Cadastrar"}
+          </button>
+        </div>
       </fieldset>
     </div>
   );
