@@ -101,45 +101,43 @@ export default function UsuarioForm(props: Props) {
 
         <div className="form-group">
           <label className="control-label">Senha</label>
-          <div className="form-group">
-            <div className="input-group mb-3">
-              <input
-                type="password"
-                className="form-control"
-                value={senha}
-                onChange={e => {
-                  setSenha(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="perfilSelect">Perfil</label>
-              <select
-                className="form-control"
-                id="perfilSelect"
-                onChange={e => {
-                  console.log(Number(e.target.value));
-                  setPerfilId(Number(e.target.value));
-                }}
-              >
-                <option selected value="0">
-                  Selecione
-                </option>
-                <option value="1">Administrador</option>
-                <option value="2">Supervisor</option>
-                <option value="3">Funcionário</option>
-              </select>
-            </div>
-
-            <button
-              type="button"
-              className="btn btn-success btn-lg btn-block"
-              onClick={submit}
-            >
-              {props.usuario ? "Atualizar" : "Cadastrar"}
-            </button>
+          <div className="input-group mb-3">
+            <input
+              type="password"
+              className="form-control"
+              value={senha}
+              onChange={e => {
+                setSenha(e.target.value);
+              }}
+            />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="perfilSelect">Perfil</label>
+            <select
+              className="form-control"
+              id="perfilSelect"
+              onChange={e => {
+                console.log(Number(e.target.value));
+                setPerfilId(Number(e.target.value));
+              }}
+            >
+              <option selected value="0">
+                Selecione
+              </option>
+              <option value="1">Administrador</option>
+              <option value="2">Supervisor</option>
+              <option value="3">Funcionário</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            className="btn btn-success btn-lg btn-block"
+            onClick={submit}
+          >
+            {props.usuario ? "Atualizar" : "Cadastrar"}
+          </button>
         </div>
       </fieldset>
     </div>

@@ -6,6 +6,7 @@ import { HashRouter } from "react-router-dom";
 import DepartamentoProvider from "store/contexts/DepartamentoContext";
 import CargoProvider from "store/contexts/CargoContext";
 import UsuarioProvider from "store/contexts/UsuarioContext";
+import FuncionarioProvider from "store/contexts/FuncionarioContext";
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
         <DepartamentoProvider>
           <CargoProvider>
             <UsuarioProvider>
-              <Routes />
+              <FuncionarioProvider>
+                <Routes />
+              </FuncionarioProvider>
             </UsuarioProvider>
           </CargoProvider>
         </DepartamentoProvider>

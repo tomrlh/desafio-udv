@@ -5,13 +5,3 @@ export interface Departamento {
   nome: string;
   telefones: DepartamentoTelefone[];
 }
-
-export enum DepartamentoFieldsAPI {
-  NOME = "name",
-  TELEFONES = "telefones"
-}
-
-export enum DepartamentoFieldsNames {
-  NOME = "Nome",
-  TELEFONES = "Telefones"
-}

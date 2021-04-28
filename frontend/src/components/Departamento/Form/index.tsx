@@ -96,7 +96,9 @@ export default function DepartamentoForm(props: Props) {
                 <span
                   className="input-group-text"
                   onClick={() => {
+                    if (telefoneToAdd === "") return;
                     telefones.push(telefoneToAdd);
+                    setTelefoneToAdd("");
                     setTelefones([...telefones]);
                   }}
                 >

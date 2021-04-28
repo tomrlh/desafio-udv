@@ -2,7 +2,7 @@ export const styles = {
   bodyList: {
     width: 330,
     overflow: "auto",
-    height: 350
+    height: 200
   },
   cardBottom: {
     display: "flex",

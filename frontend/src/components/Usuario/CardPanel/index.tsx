@@ -129,13 +129,6 @@ export default function UsuariosCardPanel(props: Props) {
             }
             content={<UsuarioForm />}
           />
-
-          <button type="button" className="btn btn-link btn-sm">
-            <i
-              className="bi bi-info-circle-fill text-info"
-              style={styles.mediumIcon}
-            />
-          </button>
         </div>
       </div>
     </div>

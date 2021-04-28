@@ -33,7 +33,6 @@ const UsuarioProvider = (props: { children: React.ReactNode }) => {
   };
 
   const addUsuario = (newUsuario: Usuario) => {
-    console.log("NEW", newUsuario);
     usuarios.push(newUsuario);
     setUsuarios([...usuarios]);
   };

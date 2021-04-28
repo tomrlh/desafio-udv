@@ -7,15 +7,3 @@ export interface Cargo {
   departamento_id: number;
   departamento: Departamento | null;
 }
-
-export enum CargoFieldsAPI {
-  NOME = "name",
-  SALARIO_BASE = "salario_base",
-  DEPARTAMENTO_ID = "departamento_id"
-}
-
-export enum CargoFieldsNames {
-  NOME = "Nome",
-  SALARIO_BASE = "Salário Base",
-  DEPARTAMENTO_ID = "Departamento"
-}

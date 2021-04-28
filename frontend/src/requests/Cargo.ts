@@ -11,7 +11,6 @@ export const getCargosRequest = async (): Promise<any> => {
 };
 
 export const saveCargoRequest = async (cargo: Cargo): Promise<any> => {
-  console.log("NA REQUEST", cargo);
   let res: any = await axios
     .post("cargos", cargo)
     .then(response => response.data)

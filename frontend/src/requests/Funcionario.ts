@@ -1,38 +1,42 @@
-import { Usuario } from "types/Usuario";
+import { Funcionario } from "types/Funcionario";
 import { axiosInstance as axios } from "./Global";
 
-export const getUsuariosRequest = async (): Promise<any> => {
+export const getFuncionariosRequest = async (): Promise<any> => {
   let res: any = await axios
-    .get("users")
+    .get("funcionarios")
     .then(response => response.data)
     .catch(error => error.response.data);
 
   return res;
 };
 
-export const saveUsuarioRequest = async (usuario: Usuario): Promise<any> => {
-  let res: any = await axios
-    .post("users", usuario)
-    .then(response => response.data)
-    .catch(error => error.response.data);
-
-  return res;
-};
-
-export const atualizarUsuarioRequest = async (
-  usuario: Usuario
+export const saveFuncionarioRequest = async (
+  funcionario: Funcionario
 ): Promise<any> => {
   let res: any = await axios
-    .put(`users/${usuario.id}`, usuario)
+    .post("funcionarios", funcionario)
     .then(response => response.data)
     .catch(error => error.response.data);
 
   return res;
 };
 
-export const removeUsuarioRequest = async (usuario: Usuario): Promise<any> => {
+export const atualizarFuncionarioRequest = async (
+  funcionario: Funcionario
+): Promise<any> => {
   let res: any = await axios
-    .delete(`users/${usuario.id}`)
+    .put(`funcionarios/${funcionario.id}`, funcionario)
+    .then(response => response.data)
+    .catch(error => error.response.data);
+
+  return res;
+};
+
+export const removeFuncionarioRequest = async (
+  funcionario: Funcionario
+): Promise<any> => {
+  let res: any = await axios
+    .delete(`funcionarios/${funcionario.id}`)
     .then(response => response.data)
     .catch(error => error.response.data);
 

@@ -6,11 +6,3 @@ export interface DepartamentoTelefone {
   departamento_id: number | null;
   departamento: Departamento;
 }
-
-export enum DepartamentoTelefoneFieldsAPI {
-  TELEFONE = "name"
-}
-
-export enum DepartamentoTelefoneFieldsNames {
-  TELEFONE = "Nome"
-}

@@ -31,7 +31,6 @@ const CargoProvider = (props: { children: React.ReactNode }) => {
   };
 
   const addCargo = (newCargo: Cargo) => {
-    console.log("NEW", newCargo);
     cargos.push(newCargo);
     setCargos([...cargos]);
   };

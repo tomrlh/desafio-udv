@@ -17,7 +17,6 @@ const AuthProvider = (props: { children: React.ReactNode }) => {
 
   const signIn = async (username: string, password: string) => {
     const response = await loginRequest({ email: username, password });
-    console.log("response in AuthContext", response);
     let status: string = response.status;
     if (String(status) !== "ok") {
       // return "Usuário ou senha incorretos"

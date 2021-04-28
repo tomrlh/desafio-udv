@@ -35,7 +35,6 @@ const DepartamentoProvider = (props: { children: React.ReactNode }) => {
   };
 
   const addDepartamento = (newDepartamento: Departamento) => {
-    console.log("NEW", newDepartamento);
     departamentos.push(newDepartamento);
     setDepartamentos([...departamentos]);
   };

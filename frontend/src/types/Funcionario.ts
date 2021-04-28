@@ -1,24 +1,19 @@
+import { Cargo } from "./Cargo";
+import { FuncionarioEndereco } from "./FuncionarioEndereco";
+import { FuncionarioTelefone } from "./FuncionarioTelefone";
+
 export interface Funcionario {
-  id: number;
+  id: number | null;
   nome: string;
-  dataNascimento: string;
-  sexo: string;
   email: string;
   senha: string;
-}
-
-export enum FuncionarioFieldsAPI {
-  NOME = "nome",
-  DATA_NASCIMENTO = "data_nascimento",
-  SEXO = "sexo",
-  EMAIL = "email",
-  SENHA = "senha"
-}
-
-export enum FuncionarioFieldsNames {
-  NOME = "Nome",
-  DATA_NASCIMENTO = "Data de Nascimento",
-  SEXO = "Sexo",
-  EMAIL = "Email",
-  SENHA = "Senha"
+  data_nascimento: string;
+  sexo: string;
+  categoria: string | null;
+  salario: string | null;
+  situacao: string | null;
+  cargo_id: number | null;
+  cargo: Cargo | null;
+  telefones: FuncionarioTelefone[] | null;
+  enderecos: FuncionarioEndereco[] | null;
 }
