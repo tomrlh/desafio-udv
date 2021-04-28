@@ -2,7 +2,8 @@
 
 ## Stack utilizada
 
-Frontend com [ReactJS](https://reactjs.org), banco de dados com MySQl (com Docker) e backend com Laravel como API
+Frontend com ReactJS![Screenshot from 2021-04-28 04-42-02](https://user-images.githubusercontent.com/7242326/116444369-0a039880-a82b-11eb-8c6e-a85896c40568.png)
+, banco de dados com MySQl (com Docker) e backend com Laravel como API
 
 ### Requerimentos para rodar localmente
 
@@ -49,3 +50,10 @@ Frontend com [ReactJS](https://reactjs.org), banco de dados com MySQl (com Docke
 
 ## Demo das telas
 
+![Screenshot from 2021-04-28 04-42-02](https://user-images.githubusercontent.com/7242326/116444396-0ff97980-a82b-11eb-8c78-23a710a34eae.png)
+
+![Screenshot from 2021-04-28 04-42-11](https://user-images.githubusercontent.com/7242326/116444417-1556c400-a82b-11eb-9ccf-27ff8ea38aeb.png)
+
+![Screenshot from 2021-04-28 04-47-03](https://user-images.githubusercontent.com/7242326/116444437-1ab40e80-a82b-11eb-8229-e7c1140d186e.png)
+
+![Screenshot from 2021-04-28 04-43-57](https://user-images.githubusercontent.com/7242326/116444456-1daeff00-a82b-11eb-9597-906ffe66b5e1.png)
