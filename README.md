@@ -2,8 +2,7 @@
 
 ## Stack utilizada
 
-Frontend com ReactJS![Screenshot from 2021-04-28 04-42-02](https://user-images.githubusercontent.com/7242326/116444369-0a039880-a82b-11eb-8c6e-a85896c40568.png)
-, banco de dados com MySQl (com Docker) e backend com Laravel como API
+Frontend com ReactJS, banco de dados com MySQl (com Docker) e backend com Laravel como API
 
 ### Requerimentos para rodar localmente
 
