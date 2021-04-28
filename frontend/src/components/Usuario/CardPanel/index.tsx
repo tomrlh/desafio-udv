@@ -1,40 +1,39 @@
 import React, { useContext, useEffect } from "react";
-import DepartamentoForm from "components/Departamento/Form";
+import UsuarioForm from "components/Usuario/Form";
 import CustomModal from "components/Global/Modal/CustomModal";
-import { Departamento } from "types/Departamento";
-import {
-  getDepartamentosRequest,
-  removeDepartamentoRequest
-} from "requests/Departamento";
-import { DepartamentoContext } from "store/contexts/DepartamentoContext";
+import { Usuario } from "types/Usuario";
+import { getUsuariosRequest, removeUsuarioRequest } from "requests/Usuario";
+import { UsuarioContext } from "store/contexts/UsuarioContext";
 import { notyfError, notyfSuccess } from "utils/notifications";
 import { generateRandomNumber } from "utils/helpers";
 import { styles } from "components/Global/Styles";
 
 type Props = {
-  departamentos: Departamento[];
+  usuarios: Usuario[];
 };
 
+const modalId = generateRandomNumber(10);
+
 const renderListItem = (
-  departamento: Departamento,
-  atualizarDepartamento: Function,
-  removeDepartamento: Function
+  usuario: Usuario,
+  atualizarUsuario: Function,
+  removeUsuario: Function
 ) => {
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center text-dark">
-      {departamento.nome}
+      {usuario.name}
       <div style={{ float: "right" }}>
         <CustomModal
-          id={"modalId"}
-          popupText="Departamento"
-          title="Departamento"
+          id={modalId}
+          popupText="Usuario"
+          title="Usuario"
           size={"modal-sm"}
           trigger={
             <button
               type="button"
               className="btn btn-link btn-sm"
               data-toggle="modal"
-              data-target={`#${"modalId"}`}
+              data-target={`#${modalId}`}
             >
               <i
                 className="bi bi-pencil-fill text-warning"
@@ -42,19 +41,19 @@ const renderListItem = (
               />
             </button>
           }
-          content={<DepartamentoForm departamento={departamento} />}
+          content={<UsuarioForm usuario={usuario} />}
         />
 
         <button
           type="button"
           className="btn btn-link btn-sm"
           onClick={async () => {
-            let response = await removeDepartamentoRequest(departamento);
+            let response = await removeUsuarioRequest(usuario);
             if (response) {
-              removeDepartamento(departamento);
-              notyfSuccess("Departamento removido");
+              removeUsuario(usuario);
+              notyfSuccess("Usuario removido");
             } else {
-              notyfError("Erro ao remover departamento");
+              notyfError("Erro ao remover usuario");
             }
           }}
         >
@@ -68,48 +67,42 @@ const renderListItem = (
   );
 };
 
-export default function DepartamentosCardPanel(props: Props) {
-  const {
-    departamentos,
-    setDepartamentos,
-    atualizarDepartamento,
-    removeDepartamento
-  } = useContext(DepartamentoContext);
+export default function UsuariosCardPanel(props: Props) {
+  const { usuarios, setUsuarios, atualizarUsuario, removeUsuario } = useContext(
+    UsuarioContext
+  );
   const modalId = generateRandomNumber(10);
 
   useEffect(() => {
-    const getDepartamentos = async () => {
-      let newDepartamentos = await getDepartamentosRequest();
-      setDepartamentos(newDepartamentos);
+    const getUsuarios = async () => {
+      let newUsuarios = await getUsuariosRequest();
+      console.log("assdasdasda", newUsuarios);
+      setUsuarios([...newUsuarios]);
     };
-    getDepartamentos();
+    getUsuarios();
   }, []);
 
   return (
     <div>
-      <div
-        className="card text-white bg-secondary mb-3"
-        style={{ maxWidth: 350 }}
-      >
+      <div className="card text-white bg-info mb-3" style={{ maxWidth: 350 }}>
         <div className="card-header">
-          <i className="bi bi-archive text-light" style={styles.mediumIcon} />{" "}
-          DEPARTAMENTOS
+          <i
+            className="bi bi-person-circle text-light"
+            style={styles.mediumIcon}
+          />{" "}
+          USUÁRIOS
         </div>
         <div className="card-body" style={styles.bodyList}>
           <ul className="list-group">
-            {departamentos.length > 0 ? (
+            {usuarios && usuarios.length > 0 ? (
               <>
-                {departamentos.map(departamento =>
-                  renderListItem(
-                    departamento,
-                    atualizarDepartamento,
-                    removeDepartamento
-                  )
+                {usuarios.map(usuario =>
+                  renderListItem(usuario, atualizarUsuario, removeUsuario)
                 )}
               </>
             ) : (
               <div className="alert alert-dismissible alert-light">
-                <p className="mb-0">Sem departamentos cadastrados</p>
+                <p className="mb-0">Sem usuarios cadastrados</p>
               </div>
             )}
           </ul>
@@ -118,8 +111,8 @@ export default function DepartamentosCardPanel(props: Props) {
         <div className="card-bottom bg-primary" style={styles.cardBottom}>
           <CustomModal
             id={modalId}
-            popupText="Departamento"
-            title="Departamento"
+            popupText="Usuario"
+            title="Usuario"
             size={"modal-sm"}
             trigger={
               <button
@@ -134,7 +127,7 @@ export default function DepartamentosCardPanel(props: Props) {
                 />
               </button>
             }
-            content={<DepartamentoForm />}
+            content={<UsuarioForm />}
           />
 
           <button type="button" className="btn btn-link btn-sm">
@@ -149,6 +142,6 @@ export default function DepartamentosCardPanel(props: Props) {
   );
 }
 
-DepartamentosCardPanel.defaultProps = {
-  departamentos: []
+UsuariosCardPanel.defaultProps = {
+  usuarios: []
 };
