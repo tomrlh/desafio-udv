@@ -32,7 +32,7 @@ class CargosController extends Controller
             'nome.max' => 'Tamanho máximo para nome é 255',
             'salario_base.required' => 'Salário Base é obrigatório',
             'departamento_id.required' => 'Departamento é obrigatório',
-          ]);
+        ]);
 
         $cargo = Cargo::create([
             'nome' => $request->nome,

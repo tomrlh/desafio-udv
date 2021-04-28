@@ -49,6 +49,8 @@ Frontend com ReactJS, banco de dados com MySQl (com Docker) e backend com Larave
 
 ## Demo das telas
 
+![demo-desafio-udv-app](https://user-images.githubusercontent.com/7242326/116447939-e9d5d880-a82e-11eb-84c5-c1d83f6124bc.gif)
+
 ![Screenshot from 2021-04-28 04-42-02](https://user-images.githubusercontent.com/7242326/116444396-0ff97980-a82b-11eb-8c78-23a710a34eae.png)
 
 ![Screenshot from 2021-04-28 04-42-11](https://user-images.githubusercontent.com/7242326/116444417-1556c400-a82b-11eb-9ccf-27ff8ea38aeb.png)

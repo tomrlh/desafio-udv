@@ -109,23 +109,24 @@ export default function DepartamentoForm(props: Props) {
 
             <div style={styles.bodyList}>
               <ul className="list-group">
-                {telefones.map((telefone: any, idx: number) => (
-                  <li
-                    className="list-group-item d-flex justify-content-between align-items-center"
-                    key={idx}
-                  >
-                    {typeof telefone === "object"
-                      ? telefone.telefone
-                      : telefone}
-                    <span
-                      className="badge badge-primary badge-pill"
-                      style={styles.addTelefone}
-                      onClick={() => removeTelefone(idx)}
+                {telefones &&
+                  telefones.map((telefone: any, idx: number) => (
+                    <li
+                      className="list-group-item d-flex justify-content-between align-items-center"
+                      key={idx}
                     >
-                      X
-                    </span>
-                  </li>
-                ))}
+                      {typeof telefone === "object"
+                        ? telefone.telefone
+                        : telefone}
+                      <span
+                        className="badge badge-primary badge-pill"
+                        style={styles.addTelefone}
+                        onClick={() => removeTelefone(idx)}
+                      >
+                        X
+                      </span>
+                    </li>
+                  ))}
               </ul>
             </div>
 
