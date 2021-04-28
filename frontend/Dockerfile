@@ -10,7 +10,7 @@ WORKDIR /app
 # Instalando dependências da aplicação e armazenando em cache.
 COPY . /app
 RUN npm install --silent
-# RUN npm audit fix --silent
+RUN npm audit fix --silent
 RUN npm install react-scripts@3.4.4 -g --silent
 
 # start app

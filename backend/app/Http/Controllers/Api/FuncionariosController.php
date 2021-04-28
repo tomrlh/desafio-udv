@@ -32,11 +32,20 @@ class FuncionariosController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:255',
-            'data_nascimento' => 'required|date',
+            'data_nascimento' => 'required',
             'sexo' => 'required|between:0,1',
             'email' => 'required|email',
             'senha' => 'required|min:8',
-        ]);
+        ], [
+            'nome.required' => 'Nome é obrigatório',
+            'nome.max' => 'Tamanho máximo para nome é 255',
+            'data_nascimento.required' => 'Data nasc. é obrigatória',
+            'sexo.required' => 'Sexo é obrigatório',
+            'email.required' => 'Email é obrigatório',
+            'email.email' => 'Insira um email com formato válido',
+            'senha.required' => 'Senha é obrigatória',
+            'senha.min' => 'Tamanho mínimo para senha é 8',
+          ]);
 
         $funcionario = Funcionario::create([
             'nome' => $request->nome,

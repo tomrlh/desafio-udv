@@ -6,6 +6,7 @@ import {
 import { FuncionarioContext } from "store/contexts/FuncionarioContext";
 import { Funcionario } from "types/Funcionario";
 import { notyfError, notyfErrors, notyfSuccess } from "utils/notifications";
+import InputMask from "react-input-mask";
 
 type Props = {
   funcionario: Funcionario;
@@ -150,9 +151,9 @@ export default function FuncionarioForm(props: Props) {
             <div className="form-group">
               <label className="control-label">Data de Nascimento</label>
               <div className="input-group mb-3">
-                <input
-                  type="text"
+                <InputMask
                   className="form-control"
+                  mask="99/99/9999"
                   value={dataNascimento}
                   onChange={e => {
                     setDataNascimento(e.target.value);

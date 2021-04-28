@@ -7,8 +7,10 @@ import React, { useContext, useEffect } from "react";
 import FuncionariosTable from "components/Funcionario/Table";
 import { getFuncionariosRequest } from "requests/Funcionario";
 import { FuncionarioContext } from "store/contexts/FuncionarioContext";
+import { AuthContext } from "store/contexts/AuthContext";
 
 export default function Dashboard() {
+  const { loggedUser } = useContext(AuthContext);
   const { funcionarios, setFuncionarios } = useContext(FuncionarioContext);
 
   useEffect(() => {
@@ -34,27 +36,41 @@ export default function Dashboard() {
       </h6>
 
       <div className="row">
-        <div className="col-md-6">
-          <DepartamentosCardPanel />
-        </div>
+        {loggedUser &&
+          (loggedUser.perfil?.nome === "Supervisor" ||
+            loggedUser.perfil?.nome === "Administrador") && (
+            <div className="col-md-6">
+              <DepartamentosCardPanel />
+            </div>
+          )}
 
-        <div className="col-md-6">
-          <CargosCardPanel />
-        </div>
+        {loggedUser &&
+          (loggedUser.perfil?.nome === "Supervisor" ||
+            loggedUser.perfil?.nome === "Administrador") && (
+            <div className="col-md-6">
+              <CargosCardPanel />
+            </div>
+          )}
       </div>
 
       <div className="row">
-        <div className="col-md-6">
-          <UsuariosCardPanel />
-        </div>
+        {loggedUser && loggedUser.perfil?.nome === "Administrador" && (
+          <div className="col-md-6">
+            <UsuariosCardPanel />
+          </div>
+        )}
 
-        <div className="col-md-6">
-          <FuncionariosCardPanel />
-        </div>
+        {loggedUser && loggedUser.perfil?.nome === "Administrador" && (
+          <div className="col-md-6">
+            <FuncionariosCardPanel />
+          </div>
+        )}
       </div>
 
       <div className="row">
-        <FuncionariosTable funcionarios={funcionarios} />
+        {loggedUser && loggedUser.perfil?.nome === "Administrador" && (
+          <FuncionariosTable funcionarios={funcionarios} />
+        )}
       </div>
     </div>
   );

@@ -7,20 +7,23 @@ import DepartamentoProvider from "store/contexts/DepartamentoContext";
 import CargoProvider from "store/contexts/CargoContext";
 import UsuarioProvider from "store/contexts/UsuarioContext";
 import FuncionarioProvider from "store/contexts/FuncionarioContext";
+import AuthProvider from "store/contexts/AuthContext";
 
 function App() {
   return (
     <div className="App">
       <HashRouter>
-        <DepartamentoProvider>
-          <CargoProvider>
-            <UsuarioProvider>
-              <FuncionarioProvider>
-                <Routes />
-              </FuncionarioProvider>
-            </UsuarioProvider>
-          </CargoProvider>
-        </DepartamentoProvider>
+        <AuthProvider>
+          <DepartamentoProvider>
+            <CargoProvider>
+              <UsuarioProvider>
+                <FuncionarioProvider>
+                  <Routes />
+                </FuncionarioProvider>
+              </UsuarioProvider>
+            </CargoProvider>
+          </DepartamentoProvider>
+        </AuthProvider>
       </HashRouter>
     </div>
   );

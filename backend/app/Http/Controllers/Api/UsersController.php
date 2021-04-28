@@ -27,7 +27,14 @@ class UsersController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required',
             'perfil_id' => 'required|numeric|exists:perfis,id',
-        ]);
+        ], [
+            'name.required' => 'aé obrigatório',
+            'name.max' => 'Tamanho máximo para nome é 255',
+            'email.required' => 'Email é obrigatório',
+            'email.email' => 'Insira um email com formato válido',
+            'password.required' => 'Senha é obrigatória',
+            'perfil_id.required' => 'Perfil é obrigatório',
+          ]);
 
         $user = User::create([
             'name' => $request->name,

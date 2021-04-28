@@ -13,15 +13,18 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'email|required',
             'password' => 'required',
+        ], [
+            'email.required' => 'Email é obrigatório',
+            'password.required' => 'Senha é obrigatória',
         ]);
 
         $credentials = request(['email', 'password']);
         if (!auth()->attempt($credentials)) {
             return response()->json(
                 [
-                    'message' => 'The given data was invalid.',
+                    'message' => 'Os dados informados estão incorretos.',
                     'errors' => [
-                        'password' => ['Invalid credentials'],
+                        'password' => ['Credenciais inválidas'],
                     ],
                 ],
                 422

@@ -17,7 +17,7 @@ class CreateFuncionarios extends Migration
             $table->id();
             $table->unsignedBigInteger('cargo_id')->nullable();
             $table->string('nome');
-            $table->date('data_nascimento');
+            $table->string('data_nascimento');
             $table->string('sexo');
             $table->string('email');
             $table->string('senha');

@@ -29,6 +29,8 @@ class DepartamentosController extends Controller
 
         $departamento = Departamento::create([
             'nome' => $request->nome,
+        ], [
+            'nome.required' => 'Nome é obrigatório',
         ]);
 
         foreach ($request->telefones as $telefone) {

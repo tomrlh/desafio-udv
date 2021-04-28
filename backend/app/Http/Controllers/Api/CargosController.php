@@ -26,7 +26,13 @@ class CargosController extends Controller
             'nome' => 'required|unique:cargos|max:255',
             'salario_base' => 'required|numeric',
             'departamento_id' => 'required|numeric|exists:departamentos,id',
-        ]);
+        ], [
+            'nome.required' => 'Nome é obrigatório',
+            'nome.unique' => 'Este nome já existe',
+            'nome.max' => 'Tamanho máximo para nome é 255',
+            'salario_base.required' => 'Salário Base é obrigatório',
+            'departamento_id.required' => 'Departamento é obrigatório',
+          ]);
 
         $cargo = Cargo::create([
             'nome' => $request->nome,

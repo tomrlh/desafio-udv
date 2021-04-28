@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { notyfErrors } from "utils/notifications";
 import { loginRequest } from "../../requests/Login";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "store/contexts/AuthContext";
 
 const Login = () => {
+  const { setLoggedUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   let navigate = useNavigate();
@@ -14,6 +16,7 @@ const Login = () => {
     if (!response.access_token) {
       notyfErrors(response.data);
     } else {
+      setLoggedUser(response.usuario);
       navigate("/dashboard");
     }
   };
